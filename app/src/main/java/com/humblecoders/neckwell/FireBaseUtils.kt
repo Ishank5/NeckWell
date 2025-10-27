@@ -1,5 +1,6 @@
 package com.humblecoders.neckwell
 
+import android.annotation.SuppressLint
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -59,7 +60,7 @@ suspend fun fetchTodayPostureData(): List<PostureData> {
         Log.d("NeckWell", "Total mapped data: ${allData.size} items")
         
         val todayData = allData.filter { data ->
-            val isInRange = data.timestamp != null && data.timestamp!! >= startOfDay && data.timestamp!! <= endOfDay
+            val isInRange = data.timestamp != null && data.timestamp >= startOfDay && data.timestamp <= endOfDay
             if (isInRange) {
                 Log.d("NeckWell", "Included: timestamp=${data.timestamp}, posture=${data.posture}")
             } else {
@@ -171,6 +172,7 @@ fun getPostureDistribution(postureDataList: List<PostureData>): Map<String, Int>
     )
 }
 
+@SuppressLint("DefaultLocale")
 fun getHourlyPostureQuality(postureDataList: List<PostureData>): List<Pair<String, Float>> {
     val hourlyData = mutableMapOf<Int, MutableList<Int>>()
 

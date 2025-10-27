@@ -1,5 +1,6 @@
 package com.humblecoders.neckwell
 
+import android.util.Log
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -13,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -181,6 +181,7 @@ fun HourlyBarChart(hourlyData: List<Pair<String, Float>>) {
         val chartHeight = size.height - 40.dp.toPx()
 
         hourlyData.forEachIndexed { index, (time, score) ->
+            Log.d("Analytics", "Drawing bar for $time with score $score")
             val barHeight = (score / maxScore) * chartHeight
             val x = (index * 2 + 0.5f) * barWidth
 
